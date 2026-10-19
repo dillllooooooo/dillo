@@ -1,29 +1,514 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Biodata Saya</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruang Diri - Nurul Fadhilah</title>
+
+<style>
+:root {
+  --bg-dark: #0f0c1b;
+  --card-bg: rgba(255,255,255,0.05);
+  --primary-pink: #ec4899;
+  --primary-purple: #a855f7;
+  --text-main: #f3e8ff;
+  --text-muted: #c084fc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(at 10% 10%, rgba(236,72,153,.2), transparent 50%),
+    radial-gradient(at 90% 90%, rgba(168,85,247,.2), transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  padding: 30px 15px;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(236,72,153,.2);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.3);
+  animation: fadeIn .8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-header, .footer {
+  text-align: center;
+}
+
+.avatar-wrapper {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg,var(--primary-pink),var(--primary-purple));
+  box-shadow: 0 0 20px rgba(236,72,153,.5);
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.profile-title h1, .footer h2 {
+  background: linear-gradient(to right,var(--primary-pink),var(--primary-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.profile-title h1 {
+  font-size: 1.8rem;
+}
+
+.bio-list {
+  margin-top: 15px;
+  text-align: left;
+  background: rgba(0,0,0,.2);
+  padding: 15px 20px;
+  border-radius: 12px;
+  border-left: 3px solid var(--primary-pink);
+}
+
+.bio-item {
+  margin-bottom: 8px;
+  font-size: .95rem;
+}
+
+.bio-label, label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::before {
+  content: '';
+  width: 8px;
+  height: 18px;
+  background: var(--primary-pink);
+  border-radius: 4px;
+}
+
+.film-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(236,72,153,.15);
+  border-radius: 15px;
+  padding: 18px;
+}
+
+.film-card h3 {
+  color: white;
+  margin-bottom: 8px;
+}
+
+.film-card p {
+  color: #d1d5db;
+  font-size: .9rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg,var(--primary-pink),var(--primary-purple));
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: .85rem;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(236,72,153,.3);
+  border-radius: 10px;
+  color: white;
+  font-size: .95rem;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  outline: 1px solid var(--primary-pink);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+input[type="date"] {
+  color-scheme: dark;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg,var(--primary-pink),var(--primary-purple));
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.btn-submit:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.guestbook-list, .order-list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guestbook-item, .order-item {
+  background: rgba(0,0,0,.2);
+  padding: 12px 15px;
+  border-radius: 10px;
+  border-left: 2px solid var(--primary-purple);
+  overflow-wrap: anywhere;
+}
+
+.name {
+  font-weight: bold;
+  color: var(--primary-pink);
+  font-size: .9rem;
+}
+
+.message, .order-date {
+  font-size: .9rem;
+  color: #e5e7eb;
+  margin-top: 5px;
+  white-space: pre-wrap;
+}
+
+.footer h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.footer p {
+  color: #d1d5db;
+  font-weight: 800;
+  line-height: 1.8;
+  font-size: .95rem;
+}
+
+.status {
+  margin-top: 12px;
+  font-size: .9rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+</style>
 </head>
+
 <body>
+<div class="container">
 
-    <h1>BIODATA DIRI</h1>
+  <!-- PROFIL -->
+  <section class="card profile-header">
+    <div class="avatar-wrapper">
+      <img src="08.jpeg" alt="Foto Nurul Fadhilah">
+    </div>
+    <div class="profile-title">
+      <h1>Nurul Fadhilah</h1>
+    </div>
+    <div class="bio-list">
+      <div class="bio-item"><span class="bio-label">Nama:</span> Nurul Fadhilah</div>
+      <div class="bio-item"><span class="bio-label">Hobi:</span> Memasak dan Menonton</div>
+      <div class="bio-item"><span class="bio-label">Cita-cita:</span> BOS MUDA</div>
+    </div>
+  </section>
 
-    <h2>Data Diri</h2>
-<img src="poto/08.jpeg" alt="poto/08.jpeg" height="10%" width="10%">
-    <p>Nama: Nurul Fadhilah</p>
-    <p> Tanggal Lahir:15-06-2010  </p>
-    <p>Alamat: Lajoa</p>
-    <p>Sekolah: Smkn 3 Soppeng</p>
-    
+  <!-- FILM FAVORIT -->
+  <section class="card">
+    <h2 class="section-title">Film Favorit</h2>
+    <div class="film-card">
+      <h3>Naruto</h3>
+      <p>Anime tentang persahabatan, perjuangan, dan tekad pantang menyerah untuk meraih impian.</p>
+      <a class="btn-link"
+         href="https://www.crunchyroll.com/series/GY9PJ5KWR/naruto"
+         target="_blank" rel="noopener noreferrer">
+        Tonton Naruto ↗
+      </a>
+    </div>
+  </section>
 
-    <h2>Hobby</h2>
-    <ul>
-        <li>Memasak</li>
-        <li>Menonton</li>
-    </ul>
+  <!-- BUKU TAMU -->
+  <section class="card">
+    <h2 class="section-title">Buku Tamu</h2>
+    <form id="guestbookForm">
+      <div class="form-group">
+        <label for="guestNama">Nama kamu</label>
+        <input type="text" id="guestNama"
+               placeholder="Masukkan nama kamu" required>
+      </div>
+      <div class="form-group">
+        <label for="pesan">Pesan kamu</label>
+        <textarea id="pesan"
+                  placeholder="Tulis pesan untuk Nurul..."
+                  required></textarea>
+      </div>
+      <button type="submit" class="btn-submit" id="guestButton">
+        Kirim Pesan ↗
+      </button>
+    </form>
+    <div id="guestStatus" class="status"></div>
+    <div class="guestbook-list" id="guestbookList"></div>
+  </section>
 
-    <h2>Cita-Cita</h2>
-    <p>BOS MUDA</p>
+  <!-- BUKU DIGITAL -->
+  <section class="card">
+    <h2 class="section-title">📚 Buku Digital</h2>
+    <p style="color:#d1d5db; margin-bottom:15px;">
+      Isi nama dan tanggal pemesanan di bawah ini.
+    </p>
 
+    <form id="orderForm">
+      <div class="form-group">
+        <label for="orderNama">Nama Pemesan</label>
+        <input type="text" id="orderNama"
+               placeholder="Masukkan nama lengkap" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tanggal">Tanggal Pesan</label>
+        <input type="date" id="tanggal" required>
+      </div>
+
+      <button type="submit" class="btn-submit" id="orderButton">
+        Simpan Pesanan
+      </button>
+    </form>
+
+    <div id="orderStatus" class="status"></div>
+    <h3 style="margin-top:20px;">📖 Pesanan di Browser Ini</h3>
+    <div id="orderList" class="order-list"></div>
+  </section>
+
+  <!-- PENUTUP -->
+  <section class="card footer">
+    <h2>SEKIAN DARI SAYA</h2>
+    <p>
+      BUKAN DJ TAPI BREAKBEAT<br>
+      BUKAN YANG TERBAIK, TAPI SIAP JADI LEBIH BAIK!<br>
+      THANKS FOR VISITING ✌🏻
+    </p>
+  </section>
+
+</div>
+
+<script>
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbykTGplkwHevkWGrXt6XPLfZaogAVzPIlp6lIOVuwH4MRyeglxGBWxir7vhWKOzQa7KeA/exec";
+
+/*
+  Mengirim data ke Apps Script.
+  Apps Script harus mendukung jenis data:
+  {jenis:"bukuTamu", nama, pesan}
+  {jenis:"pesanan", nama, tanggal}
+*/
+async function kirimKeSpreadsheet(data) {
+  await fetch(SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(data)
+  });
+}
+
+/* BUKU TAMU */
+const guestForm = document.getElementById("guestbookForm");
+const guestList = document.getElementById("guestbookList");
+const guestStatus = document.getElementById("guestStatus");
+const guestButton = document.getElementById("guestButton");
+
+guestForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const nama = document.getElementById("guestNama").value.trim();
+  const pesan = document.getElementById("pesan").value.trim();
+
+  if (!nama || !pesan) return;
+
+  guestButton.disabled = true;
+  guestButton.textContent = "Mengirim...";
+  guestStatus.textContent = "Sedang mengirim pesan...";
+
+  try {
+    await kirimKeSpreadsheet({
+      jenis: "bukuTamu",
+      nama: nama,
+      pesan: pesan,
+      tanggal: new Date().toLocaleString("id-ID")
+    });
+
+    const item = document.createElement("div");
+    item.className = "guestbook-item";
+
+    const namaEl = document.createElement("div");
+    namaEl.className = "name";
+    namaEl.textContent = nama;
+
+    const pesanEl = document.createElement("div");
+    pesanEl.className = "message";
+    pesanEl.textContent = pesan;
+
+    item.append(namaEl, pesanEl);
+    guestList.prepend(item);
+    guestForm.reset();
+
+    guestStatus.textContent =
+      "Permintaan pengiriman selesai. Periksa Spreadsheet untuk memastikan data masuk.";
+  } catch (error) {
+    guestStatus.textContent =
+      "Gagal mengirim. Periksa koneksi internet.";
+  } finally {
+    guestButton.disabled = false;
+    guestButton.textContent = "Kirim Pesan ↗";
+  }
+});
+
+/* BUKU DIGITAL */
+const orderForm = document.getElementById("orderForm");
+const orderList = document.getElementById("orderList");
+const orderStatus = document.getElementById("orderStatus");
+const orderButton = document.getElementById("orderButton");
+
+let orders = [];
+
+try {
+  orders = JSON.parse(localStorage.getItem("pesananBuku") || "[]");
+  if (!Array.isArray(orders)) orders = [];
+} catch (e) {
+  orders = [];
+}
+
+function tampilkanPesanan() {
+  orderList.replaceChildren();
+
+  if (orders.length === 0) {
+    orderList.textContent = "Belum ada pesanan di browser ini.";
+    return;
+  }
+
+  orders.forEach(function(order) {
+    const item = document.createElement("div");
+    item.className = "order-item";
+
+    const nama = document.createElement("div");
+    nama.className = "name";
+    nama.textContent = "Nama: " + order.nama;
+
+    const tanggal = document.createElement("div");
+    tanggal.className = "order-date";
+    tanggal.textContent = "Tanggal pesan: " + order.tanggal;
+
+    item.append(nama, tanggal);
+    orderList.appendChild(item);
+  });
+}
+
+orderForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const nama = document.getElementById("orderNama").value.trim();
+  const tanggal = document.getElementById("tanggal").value;
+
+  if (!nama || !tanggal) {
+    orderStatus.textContent = "Nama dan tanggal wajib diisi.";
+    return;
+  }
+
+  orderButton.disabled = true;
+  orderButton.textContent = "Mengirim...";
+  orderStatus.textContent = "Sedang mengirim pesanan...";
+
+  try {
+    await kirimKeSpreadsheet({
+      jenis: "pesanan",
+      nama: nama,
+      tanggal: tanggal
+    });
+
+    orders.unshift({nama: nama, tanggal: tanggal});
+
+    try {
+      localStorage.setItem("pesananBuku", JSON.stringify(orders));
+    } catch (storageError) {
+      // Pesanan masih dapat ditampilkan untuk sesi ini.
+    }
+
+    tampilkanPesanan();
+    orderForm.reset();
+
+    orderStatus.textContent =
+      "Permintaan pengiriman selesai. Periksa Spreadsheet untuk memastikan data masuk.";
+  } catch (error) {
+    orderStatus.textContent =
+      "Gagal mengirim. Periksa koneksi dan URL Apps Script.";
+  } finally {
+    orderButton.disabled = false;
+    orderButton.textContent = "Simpan Pesanan";
+  }
+});
+
+tampilkanPesanan();
+</script>
 </body>
 </html>
